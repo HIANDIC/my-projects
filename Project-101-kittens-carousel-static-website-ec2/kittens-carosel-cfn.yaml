@@ -1,7 +1,26 @@
 AWSTemplateFormatVersion: 2010-09-09
+# with | we can write our description in more lines and without ""
 Description: |
-
+  This CloudFormation Template was written for
+  running Kittens Carousel Static Website on EC2.
+  Kittens Carousel Static Website will be
+  deployed on Amazon Linux 2
+  (ami-05fa00d4c63e32376) EC2 Instance with
+  custom security group which allows http
+  connections on port 80 and ssh port 22 from
+  anywhere. Kittens Carousel Static Website
+  is downloaded from my Public Github repository,
+  then deployed on Apache Web Server.
 Resources:
+  WebServerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "String" # Required
+      GroupName: "String"
+      SecurityGroupEgress: SecurityGroupEgress
+      SecurityGroupIngress: SecurityGroupIngress
+      Tags: Tags
+      VpcId: "String"
 
 # here we can take an output as DNSName of cloudFormation
 Outputs:
