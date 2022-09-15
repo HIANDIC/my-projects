@@ -58,5 +58,10 @@ Resources:
           systemctl start httpd
           systemctl enable httpd
 
-# here we can take an output as DNSName of cloudFormation
+# here we can take an output as DNSName of cloudFormation Service
 Outputs:
+  WebSiteURL:
+    Value: !Sub
+      - http://${PublicAddress}
+      - PublicAddress: !GetAtt WebServerHost.PublicDnsName # !GetAtt WebServerHost.PublicIPV4 is another option for assign this value to variable PublicAddress
+    Description: Kittens Carousel Application URL
