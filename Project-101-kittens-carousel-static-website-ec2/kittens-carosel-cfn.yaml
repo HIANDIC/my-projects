@@ -43,7 +43,20 @@ Resources:
         - Key: Name
           # as a value we assign stack name. Stack name will be created later. Because of that we use sub function to handle this issue.
           Value: !Sub Web Server of ${AWS::StackName} # here we use sub function in order to assign a not defined value. This value is not already created. It will be created later
-      UserData: "String"
+      UserData:
+        Fn::Base64: !Sub |
+          #! /bin/bash
+          yum update -y
+          yum install httpd -y
+          FOLDER="https://raw.githubusercontent.com/HIANDIC/my-projects/main/Project-101-kittens-carousel-static-website-ec2/static-web"
+          cd /var/www/html
+          wget $FOLDER/index.html
+          wget $FOLDER/cat0.jpg
+          wget $FOLDER/cat1.jpg
+          wget $FOLDER/cat2.jpg
+          wget $FOLDER/cat3.png
+          systemctl start httpd
+          systemctl enable httpd
 
 # here we can take an output as DNSName of cloudFormation
 Outputs:
