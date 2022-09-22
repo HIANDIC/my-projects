@@ -52,3 +52,8 @@ Resources:
         python3 app.py
 
 Outputs:
+  WebSiteURL:
+    Value: ! !Sub 
+      - http://${PublicAddress}
+      - PublicAddress: !GetAtt WebServerHost.PublicDnsName
+    Description: Roman Numerals Converter Application URL 
